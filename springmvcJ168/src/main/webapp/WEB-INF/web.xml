@@ -4,13 +4,24 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
           http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
+         
+   <!-- 监听器加载spring上下文 
+     <listener>
+     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>      
+     <context-param>
+       <param-name>contextConfigLocation</param-name>
+       <param-value>classpath:application.xml</param-value>
+     </context-param>
+  -->   
+     
   <servlet>
-    <servlet-name>dispatcherServlet</servlet-name>
+    <servlet-name>dispatcher</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
   </servlet>
   
    <servlet-mapping>
-     <servlet-name>dispatcherServlet</servlet-name>
+     <servlet-name>dispatcher</servlet-name>
      <url-pattern>*.lovo</url-pattern>
    </servlet-mapping>
 </web-app>
