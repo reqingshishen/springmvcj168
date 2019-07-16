@@ -14,10 +14,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 <h2>springMVC</h2>
 
-   <form action="user/savaUser.lovo" method="post">
+   <form action="user/savaUserParam.lovo" method="post">
         <span>用户名</span><input type="text" name="userName">
          <span>用户密码</span><input type="password" name="password">
          <input type="submit">
    </form>
+   <span>${info}</span>
+   <hr/>
 </body>
 </html>
