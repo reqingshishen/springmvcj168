@@ -2,6 +2,7 @@ package com.lovo.springmvc.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -10,13 +11,16 @@ import com.lovo.springmvc.entitiy.UserEntity;
 
 @Controller
 public class TestController {
+	
+Logger log=Logger.getLogger(this.getClass());
 
 	@RequestMapping("test.lovo")
 	public ModelAndView test(String message) {
 		ModelAndView mv=new ModelAndView();
 		mv.setViewName("index.jsp");
 		mv.addObject("info","hello word");
-		System.out.println("后台"+message);
+
+		log.info("后台"+message);
 		return mv;
 	}
 	
