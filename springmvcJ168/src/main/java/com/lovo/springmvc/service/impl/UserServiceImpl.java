@@ -1,5 +1,7 @@
 package com.lovo.springmvc.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,12 @@ public class UserServiceImpl implements IUserService {
 	public void SavaUser(UserEntity user) {
 		
 		userDao.save(user);
+	}
+
+	@Override
+	public List<UserEntity> findListUser() {
+
+		return (List<UserEntity>) userDao.findAll();
 	}
 
 }

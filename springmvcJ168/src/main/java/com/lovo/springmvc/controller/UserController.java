@@ -1,5 +1,7 @@
 package com.lovo.springmvc.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.lovo.springmvc.entitiy.UserEntity;
 import com.lovo.springmvc.service.IUserService;
@@ -25,11 +28,23 @@ public class UserController {
 	public ModelAndView savaUser(UserEntity user) {
 		ModelAndView mv=new ModelAndView();
 		userService.SavaUser(user);
-		mv.addObject("info","保存成功");
-		mv.setViewName("index");
+		//重定向到查询
+	   RedirectView rv=new RedirectView();
+	   rv.setUrl("findUserList.lovo");
+	  //把重定向视图放入到模型视图
+	   mv.setView(rv);
 		return mv;
 		
 	}
+	
+	@RequestMapping("/savaUser2.lovo")
+	public String savaUser2(UserEntity user) {
+
+		userService.SavaUser(user);
+		return "redirect:findUserList.lovo";
+		
+	}
+	
 	
 	@RequestMapping("/savaUserString.lovo")
 	public String savaUserString(UserEntity user,HttpServletRequest request) {
@@ -62,4 +77,17 @@ public class UserController {
 		user.setPassword("123456");
 		return user;
 	}
+	
+	@RequestMapping("/findUserList.lovo")
+	public ModelAndView findUserList() {
+		
+		ModelAndView mv=new ModelAndView("show");
+		//查询所有用户
+		List<UserEntity>  list=	userService.findListUser();
+		//把数据放入模型
+		mv.addObject("listUser", list);
+		return mv;
+	}
+	
+	
 }
