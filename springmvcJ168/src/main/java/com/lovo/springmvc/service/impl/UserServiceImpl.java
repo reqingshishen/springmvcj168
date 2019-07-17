@@ -16,7 +16,7 @@ public class UserServiceImpl implements IUserService {
 	private IUserDao userDao;
     @Autowired
     private IUserQueryDao userQueryDao;
-	public void SavaUser(UserEntity user) {
+	public void savaUser(UserEntity user) {
 		
 		userDao.save(user);
 	}
@@ -58,6 +58,12 @@ public class UserServiceImpl implements IUserService {
 		
 		
 		return userQueryDao.getUserList(hql, params);
+	}
+
+	@Override
+	public UserEntity findByUserNameAndPassword(String userName, String password) {
+	
+		return userDao.findByUserNameAndPassword(userName, password);
 	}
 
 }

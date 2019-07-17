@@ -25,9 +25,13 @@ public class UserController {
 	private IUserService userService ;
 	
 	@RequestMapping("/savaUser.lovo")
-	public ModelAndView savaUser(UserEntity user) {
+	public ModelAndView savaUser(UserEntity user,HttpServletRequest req) {
 		ModelAndView mv=new ModelAndView();
-		userService.SavaUser(user);
+		userService.savaUser(user);
+	   //保存成功代表登录，把用户放入到session
+		 req.getSession().setAttribute("userObj",user);
+		
+		
 		//重定向到查询
 	   RedirectView rv=new RedirectView();
 	   rv.setUrl("findUserList.lovo");
@@ -40,7 +44,7 @@ public class UserController {
 	@RequestMapping("/savaUser2.lovo")
 	public String savaUser2(UserEntity user) {
 
-		userService.SavaUser(user);
+		userService.savaUser(user);
 		return "redirect:findUserList.lovo";
 		
 	}
@@ -49,7 +53,7 @@ public class UserController {
 	@RequestMapping("/savaUserString.lovo")
 	public String savaUserString(UserEntity user,HttpServletRequest request) {
 		
-		userService.SavaUser(user);
+		userService.savaUser(user);
 	    request.setAttribute("info","保存成功");
 		return "index";		
 	}
@@ -90,5 +94,26 @@ public class UserController {
 		return mv;
 	}
 	
+	//登录
+	@RequestMapping("/loginUser.lovo")
+  public ModelAndView loginUser(String userName,String password,HttpServletRequest req) {
+	  ModelAndView mv=new ModelAndView("show");
+	UserEntity user=  userService.findByUserNameAndPassword(userName, password);
+	  //如果登录成功就放入到session，否则就回到登录页面
+	if(null!=user) {
+		req.getSession().setAttribute("userObj", user);
+		//重定向到查询
+		   RedirectView rv=new RedirectView();
+		   rv.setUrl("findUserList.lovo");
+		  //把重定向视图放入到模型视图
+		   mv.setView(rv);
+	}else {
+		 mv.setViewName("login");
+	}
+	  
+	  
+	
+		return mv;
+  }	
 	
 }

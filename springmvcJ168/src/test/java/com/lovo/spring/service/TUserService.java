@@ -26,12 +26,17 @@ public class TUserService {
 		UserEntity user=new UserEntity();//瞬时状态
 	 
 	   	
-		s.SavaUser(user);
+		s.savaUser(user);
 	}
 	
 	@Test
 	public void testListUser() {
 		List<UserEntity> list=	s.getUserListHQL("", "123");
 		System.out.println(list.size());
+	}
+	@Test
+	public void testLogin() {
+	UserEntity user=	s.findByUserNameAndPassword("赵云","123");
+	System.out.println(user.getUserName());
 	}
 }

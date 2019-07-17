@@ -6,4 +6,5 @@ import com.lovo.springmvc.entitiy.UserEntity;
 
 public interface IUserDao extends CrudRepository<UserEntity,String>{
 
+	public UserEntity findByUserNameAndPassword(String userName,String password);
 }

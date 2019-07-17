@@ -9,7 +9,7 @@ public interface IUserService {
    * 保存用户
    * @param user
    */
-	public void SavaUser(UserEntity user);
+	public void savaUser(UserEntity user);
 	/**
 	 * 查询所有
 	 * @return
@@ -24,4 +24,11 @@ public interface IUserService {
 	public List<UserEntity> getUserList(String userName, String password);
 	
 	public List<UserEntity> getUserListHQL(String userName, String password);
+	/**
+	 * 根据用户名和密码查询出对象
+	 * @param userName
+	 * @param password
+	 * @return
+	 */
+	public UserEntity findByUserNameAndPassword(String userName,String password);
 }
