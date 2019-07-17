@@ -30,15 +30,16 @@
     </mvc:message-converters>    
 </mvc:annotation-driven>  
 
-    <!--拦截器-->
+    <!--拦截器
 
  <mvc:interceptors>
     <mvc:interceptor>
        <mvc:mapping path="/**"/>
        <mvc:exclude-mapping path="/user/sava*.lovo"/>
           <mvc:exclude-mapping path="/user/login*.lovo"/>
+          <mvc:exclude-mapping path="/user/getJSON.lovo"/>
        <bean class="com.lovo.springmvc.util.MyInterceptor"></bean>
     </mvc:interceptor>
  </mvc:interceptors>
-
+-->
 </beans>

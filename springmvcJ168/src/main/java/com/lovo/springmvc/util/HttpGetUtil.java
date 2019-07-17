@@ -12,23 +12,17 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
+import org.apache.log4j.Logger;
 
 public class HttpGetUtil {
+	static Logger log=Logger.getLogger(HttpGetUtil.class);
 	
-	public void client() {
+	public static String client(String url) {
 	CloseableHttpClient httpClient = HttpClientBuilder.create().build();
-	StringBuffer params = new StringBuffer();
-	try {
-		// 字符数据最好encoding以下;这样一来，某些特殊字符才能传过去(如:某人的名字就是“&”,不encoding的话,传不过去)
-		params.append("name=" + URLEncoder.encode("&", "utf-8"));
-		params.append("&");
-		params.append("age=24");
-	} catch (UnsupportedEncodingException e1) {
-		e1.printStackTrace();
-	}
+     String resultStr="";
 
 	// 创建Get请求
-	HttpGet httpGet = new HttpGet("http://localhost:12345/doGetControllerTwo" + "?" + params);
+	HttpGet httpGet = new HttpGet(url);
 	// 响应模型
 	CloseableHttpResponse response = null;
 	try {
@@ -51,10 +45,10 @@ public class HttpGetUtil {
 
 		// 从响应模型中获取响应实体
 		HttpEntity responseEntity = response.getEntity();
-		System.out.println("响应状态为:" + response.getStatusLine());
+	       log.info("响应状态为:" + response.getStatusLine());
 		if (responseEntity != null) {
-			System.out.println("响应内容长度为:" + responseEntity.getContentLength());
-			System.out.println("响应内容为:" + EntityUtils.toString(responseEntity));
+			log.info("响应内容长度为:" + responseEntity.getContentLength());
+			resultStr= EntityUtils.toString(responseEntity);
 		}
 	} catch (Exception e) {
 		e.printStackTrace();
@@ -72,5 +66,7 @@ public class HttpGetUtil {
 		}
 	}
 
+	return resultStr;
 	}
+	
 }
