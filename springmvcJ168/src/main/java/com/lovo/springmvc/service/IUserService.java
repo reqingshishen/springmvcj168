@@ -15,4 +15,13 @@ public interface IUserService {
 	 * @return
 	 */
 	public List<UserEntity> findListUser();
+	/**
+	 * 根据用户名和密码查询
+	 * @param userName
+	 * @param password
+	 * @return
+	 */
+	public List<UserEntity> getUserList(String userName, String password);
+	
+	public List<UserEntity> getUserListHQL(String userName, String password);
 }

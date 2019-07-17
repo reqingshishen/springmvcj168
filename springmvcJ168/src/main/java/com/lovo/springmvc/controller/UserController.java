@@ -59,8 +59,9 @@ public class UserController {
 		ModelAndView mv=new ModelAndView();
 	    log.info(user+"/"+pass+"/");
 		mv.setViewName("index");
-		return mv;
 		
+		return mv;
+	
 	}
 	@RequestMapping("/getJSON.lovo")
 	@ResponseBody//不返回视图只返回数据
@@ -79,11 +80,11 @@ public class UserController {
 	}
 	
 	@RequestMapping("/findUserList.lovo")
-	public ModelAndView findUserList() {
+	public ModelAndView findUserList(String userName,String password) {
 		
 		ModelAndView mv=new ModelAndView("show");
 		//查询所有用户
-		List<UserEntity>  list=	userService.findListUser();
+		List<UserEntity>  list=	userService.getUserList(userName, password);
 		//把数据放入模型
 		mv.addObject("listUser", list);
 		return mv;

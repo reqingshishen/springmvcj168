@@ -2,6 +2,7 @@ package com.lovo.spring.service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -26,5 +27,11 @@ public class TUserService {
 	 
 	   	
 		s.SavaUser(user);
+	}
+	
+	@Test
+	public void testListUser() {
+		List<UserEntity> list=	s.getUserListHQL("", "123");
+		System.out.println(list.size());
 	}
 }

@@ -28,6 +28,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                  </tr>
                  </c:forEach>
              </table>
+             
+             <form action="user/findUserList.lovo">
+             用户  <input type="text" name="userName">
+          密码          <input type="text" name="password">
+          <input type="submit" value="搜索">
+             </form>
      </div>
+     
+     
 </body>
 </html>
